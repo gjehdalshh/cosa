@@ -1,5 +1,7 @@
 package com.spring.cosa.controller.dto;
 
-public class JoinDTO {
+import com.spring.cosa.entity.UserEntity;
+
+public class JoinDTO extends UserEntity {
 
 }
