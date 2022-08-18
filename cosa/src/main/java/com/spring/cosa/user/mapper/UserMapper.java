@@ -2,10 +2,13 @@ package com.spring.cosa.user.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.spring.cosa.user.dao.JoinDAO;
+import com.spring.cosa.user.dao.UserDAO;
 import com.spring.cosa.user.dto.JoinDTO;
+import com.spring.cosa.user.entity.UserEntity;
 
 @Mapper
 public interface UserMapper {
-	JoinDAO join(JoinDTO dto);
+	int insUser(JoinDTO dto);
+	int selectId(String id);
+	int selectPh(String ph);
 }

@@ -24,6 +24,6 @@ function join() {
 			return res.json()
 		}).then(function(data) {
 			console.log(data)
-			console.log(data.result)
+			alert(data.message)
 		})
 }

@@ -21,4 +21,4 @@
 </div>
 
 
-<script defer src="/res/js/user/join.js?ver=40"></script>
+<script defer src="/res/js/user/join.js?ver=41"></script>

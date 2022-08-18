@@ -14,7 +14,6 @@ public class ValidationExceptionHandler {
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
-		
         ErrorResponse errorResponse = new ErrorResponse();
         HttpStatus status = HttpStatus.BAD_REQUEST;
         errorResponse.setStatus(status.value());
