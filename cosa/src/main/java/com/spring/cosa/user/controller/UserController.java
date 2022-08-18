@@ -3,6 +3,10 @@ package com.spring.cosa.user.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,10 +36,9 @@ public class UserController {
 	
 	@ResponseBody
 	@PostMapping("/user/joinProc")
-	public Map<String, Object> join(@RequestBody JoinDTO dto) {
+	public Map<String, Object> join(@Valid @RequestBody JoinDTO dto) {
 		Map<String, Object> val = new HashMap<String, Object>();
 		
-		System.out.println(dto.getUser_nm());
 		val.put("result", dto.getUser_nm());
 		
 		return val;

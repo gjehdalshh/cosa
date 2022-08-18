@@ -9,7 +9,7 @@ function join() {
 	var param = {
 		user_id : id.value,
 		user_pw : pw.value,
-		user_name : name.value,
+		user_nm : name.value,
 		user_phone : phone.value
 	}
 	console.log(param)

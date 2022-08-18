@@ -1,10 +1,20 @@
 package com.spring.cosa.user.entity;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class UserEntity {
 	
 	private int i_user;
+	
+	@NotNull
+	@Pattern(regexp = "")
 	private String user_id;
 	private String user_pw;
+	
+	@NotNull(message = "이름을 입력해주세요")
+	@Size(min = 2, max = 4, message = "이름은 2 ~ 4자여야 합니다.")
 	private String user_nm;
 	private String user_phone;
 	private String r_dt;
