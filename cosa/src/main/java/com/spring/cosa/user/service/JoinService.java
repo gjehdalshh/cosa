@@ -14,10 +14,10 @@ public class JoinService {
 	private UserMapper mapper;
 	
 	public int joinProc(JoinDTO dto) {
-		if(mapper.selectId(dto.getUser_id()) == 1) {
+		if(mapper.selectId(dto.getUser_id()) != null) {
 			return 2;
 		}
-		if(mapper.selectPh(dto.getUser_phone()) == 1) {
+		if(mapper.selectPh(dto.getUser_phone()) != null) {
 			return 3;
 		}
 		return mapper.insUser(dto);

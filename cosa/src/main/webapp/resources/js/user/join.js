@@ -23,7 +23,26 @@ function join() {
 		}).then(function(res) {
 			return res.json()
 		}).then(function(data) {
-			console.log(data)
-			alert(data.message)
+			if(conditionVerification(data)) {
+				if(data.result == 2) {
+					alert('아이디가 존재합니다.')
+				} else if(data.result == 3) {
+					alert('전화번호가 존재합니다.')
+				} else {
+					alert('회원가입에 성공하였습니다.')
+					location.href=`/user/login`
+				}
+			}
 		})
 }
+
+function conditionVerification(data) {
+	if(data.message != null) {
+		return alert(data.message)
+	}
+	return 1
+}
+
+
+
+

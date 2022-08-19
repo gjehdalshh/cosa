@@ -3,18 +3,20 @@
 
 <mapper namespace="com.spring.cosa.user.mapper.UserMapper">
 
-	<select id="selectId" resultType="int">
-		select * from user where user_id
-		= ${user_id};
+	<select id="selectId" resultType="UserDAO">
+		SELECT * FROM user WHERE
+		user_id = #{user_id};
 	</select>
-	
-	<select id="selectPh" resultType="int">
-		select * from user where user_phone
-		= ${user_phone};
+
+	<select id="selectPh" resultType="UserDAO">
+		select * from user where
+		user_phone
+		= #{user_phone};
 	</select>
 
 	<insert id="insUser">
 		INSERT INTO user(user_id, user_pw, user_nm,
-		user_phone) VALUES (${user_id}, ${user_pw}, ${user_nm}, ${user_phone});
+		user_phone) VALUES (#{user_id}, #{user_pw}, #{user_nm},
+		#{user_phone});
 	</insert>
 </mapper>

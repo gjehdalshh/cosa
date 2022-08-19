@@ -9,6 +9,6 @@ import com.spring.cosa.user.entity.UserEntity;
 @Mapper
 public interface UserMapper {
 	int insUser(JoinDTO dto);
-	int selectId(String id);
-	int selectPh(String ph);
+	UserDAO selectId(String id);
+	UserDAO selectPh(String ph);
 }
