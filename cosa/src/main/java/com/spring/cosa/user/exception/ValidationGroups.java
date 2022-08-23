@@ -2,6 +2,7 @@ package com.spring.cosa.user.exception;
 
 public class ValidationGroups {
     public interface NotNullGroup {};
+    public interface NotBlankGroup {};
     public interface PatternCheckGroup {};
     public interface SizeCheckGroup {};
     public interface EmailCheckGroup {};

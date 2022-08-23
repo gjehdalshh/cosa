@@ -7,6 +7,11 @@
 		SELECT * FROM user WHERE
 		user_id = #{user_id};
 	</select>
+	
+	<select id="selectPw" resultType="UserDAO">
+		SELECT * FROM user WHERE
+		user_pw = #{user_pw};
+	</select>
 
 	<select id="selectPh" resultType="UserDAO">
 		select * from user where
