@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.spring.cosa.user.dao.UserDAO;
 import com.spring.cosa.user.dto.JoinDTO;
 import com.spring.cosa.user.mapper.UserMapper;
 

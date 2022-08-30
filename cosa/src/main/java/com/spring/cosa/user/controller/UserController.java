@@ -8,14 +8,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.cosa.user.dto.JoinDTO;
 import com.spring.cosa.user.dto.LoginDTO;
+import com.spring.cosa.user.dto.ProfileDTO;
 import com.spring.cosa.user.exception.ValidationSequence;
 import com.spring.cosa.user.service.JoinService;
 import com.spring.cosa.user.service.LoginService;
+import com.spring.cosa.user.service.ProfileService;
 
 @Controller
 public class UserController {
@@ -25,7 +31,11 @@ public class UserController {
 	
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private ProfileService profileService;
 
+	// 유저 회원가입
 	@GetMapping("/user/join")
 	public void join() {}
 
@@ -47,11 +57,27 @@ public class UserController {
 	@PostMapping("/user/loginProc")
 	public Map<String, Object> loginProc(@Validated(ValidationSequence.class) @RequestBody LoginDTO dto) {
 		Map<String, Object> val = new HashMap<String, Object>();
-		System.out.println("테스");
+
 		val.put("result", loginService.loginProc(dto));
 		
 		return val;
 	}
+	
+	// 회원정보 관리
+	@GetMapping("/user/profile")
+	public ModelAndView info() {
+		return profileService.mainProfile();
+	}
+	
+	@ResponseBody
+	@PostMapping("/user/profile/modify")
+	public ModelAndView modifyName(@Validated(ValidationSequence.class) @RequestBody String name) {
+		
+		return profileService.mainProfile();
+	}
+	
+	
+	
 }
 
 

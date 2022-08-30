@@ -1,5 +1,6 @@
 package com.spring.cosa.user.service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +21,23 @@ public class LoginService {
 	private BCryptPasswordEncoder bcrypt;
 	
 	@Autowired
+	private HttpServletRequest request;
+	
+	@Autowired
 	private HttpSession session;
 	
 	public int loginProc(LoginDTO dto) {
-		if(mapper.selectId(dto.getUser_id()) == null) {
+		UserDAO vo = mapper.selectId(dto.getUser_id());
+		
+		if(vo == null) {
 			return 2;
 		} 
 		if(!idPasswordCheck(dto)) {
 			return 3;
 		}
 		
+		dto.setI_user(vo.getI_user());
+		session = request.getSession(true);
 		session.setAttribute("user", dto);
 		
 		return 1;

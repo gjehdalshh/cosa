@@ -10,6 +10,8 @@ import com.spring.cosa.user.exception.ValidationGroups;
 
 public class LoginDTO extends UserEntity {
 	
+	private int i_user;
+
 	@NotBlank(message = "아이디를 입력해주세요.", groups = ValidationGroups.NotBlankGroup.class)
 	@Email(message = "아이디를 이메일 형식으로 작성해주세요.", groups = ValidationGroups.EmailCheckGroup.class)
 	private String user_id;
@@ -17,6 +19,14 @@ public class LoginDTO extends UserEntity {
 	@NotBlank(message = "비밀번호를 입력해주세요", groups = ValidationGroups.NotBlankGroup.class)
 	@Pattern(regexp="^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "비밀번호는 8자 이상 영문과 숫자를 포함해주세요.", groups = ValidationGroups.PatternCheckGroup.class)
 	private String user_pw;
+	
+	public int getI_user() {
+		return i_user;
+	}
+
+	public void setI_user(int i_user) {
+		this.i_user = i_user;
+	}
 
 	public String getUser_id() {
 		return user_id;
