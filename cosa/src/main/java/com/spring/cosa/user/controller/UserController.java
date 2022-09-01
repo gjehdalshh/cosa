@@ -8,16 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.cosa.user.dto.JoinDTO;
 import com.spring.cosa.user.dto.LoginDTO;
 import com.spring.cosa.user.dto.ProfileDTO;
+import com.spring.cosa.user.dto.UserImgDTO;
 import com.spring.cosa.user.exception.ValidationSequence;
 import com.spring.cosa.user.service.JoinService;
 import com.spring.cosa.user.service.LoginService;
@@ -87,6 +86,18 @@ public class UserController {
 		
 		Map<String, Object> val = new HashMap<String, Object>();
 		val.put("data", profileService.modifyProfilePh(dto));
+		
+		return val;
+	}
+	
+	@ResponseBody
+	@PostMapping("/user/profile/insertImg")
+	public Map<String, Object> insProfileImg(@RequestBody UserImgDTO dto) {
+		
+		Map<String, Object> val = new HashMap<String, Object>();
+		System.out.println(dto.getFile_name());
+		System.out.println(dto.getFile_type());
+		
 		
 		return val;
 	}

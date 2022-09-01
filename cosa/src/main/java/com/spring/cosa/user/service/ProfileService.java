@@ -16,34 +16,32 @@ public class ProfileService {
 
 	@Autowired
 	private UserMapper mapper;
-	
+
 	@Autowired
 	private HttpSession session;
-	
+
 	public ModelAndView showMainProfile() {
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/user/profile");
 		mv.addObject("data", selectProfile());
-		
+
 		return mv;
 	}
-	
+
+	private UserDAO selectProfile() {
+
+		LoginDTO dto = (LoginDTO) session.getAttribute("user");
+		UserDAO vo = mapper.selectId(dto.getUser_id());
+
+		return vo;
+	}
+
 	public int modifyProfileNm(ProfileDTO dto) {
 		return mapper.modifyProfileNm(dto);
 	}
-	
+
 	public int modifyProfilePh(ProfileDTO dto) {
 		return mapper.modifyProfilePh(dto);
-	}
-	
-	private UserDAO selectProfile() {
-		
-		
-		
-		LoginDTO dto = (LoginDTO)session.getAttribute("user");
-		UserDAO vo = mapper.selectId(dto.getUser_id());
-		
-		return vo;
 	}
 }

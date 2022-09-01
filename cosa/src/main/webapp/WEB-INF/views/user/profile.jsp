@@ -16,8 +16,15 @@
 			value="${data.user_phone }"> <span
 			onclick="changePhoneNumber()">수정</span>
 	</div>
+	<form method="post" action="" enctype="multipart/form-data">
+		<div>
+			<input type="file" name="file">
+			<input type="submit" value="업로드">
+		</div>
+	</form>
+	<input type="file" id="fileUpload"> <span onclick="upload()">업로드</span>
 </div>
 
 
-<script defer src="/res/js/user/profile.js?ver=7"></script>
+<script defer src="/res/js/user/profile.js?ver=19"></script>
 <script defer src="/res/js/user/verification.js?ver=70"></script>
