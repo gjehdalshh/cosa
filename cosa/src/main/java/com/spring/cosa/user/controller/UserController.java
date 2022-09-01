@@ -42,8 +42,8 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/user/joinProc")
 	public Map<String, Object> joinProc(@Validated(ValidationSequence.class) @RequestBody JoinDTO dto) {
+		
 		Map<String, Object> val = new HashMap<String, Object>();
-
 		val.put("result", joinService.joinProc(dto));
 
 		return val;
@@ -56,8 +56,8 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/user/loginProc")
 	public Map<String, Object> loginProc(@Validated(ValidationSequence.class) @RequestBody LoginDTO dto) {
+		
 		Map<String, Object> val = new HashMap<String, Object>();
-
 		val.put("result", loginService.loginProc(dto));
 		
 		return val;
@@ -66,18 +66,30 @@ public class UserController {
 	// 회원정보 관리
 	@GetMapping("/user/profile")
 	public ModelAndView info() {
-		return profileService.mainProfile();
+		return profileService.showMainProfile();
 	}
 	
+	// 화원이름 변경
 	@ResponseBody
-	@PostMapping("/user/profile/modify")
-	public ModelAndView modifyName(@Validated(ValidationSequence.class) @RequestBody String name) {
+	@PostMapping("/user/profile/modifyNm")
+	public Map<String, Object> modifyProfileNm(@Validated(ValidationSequence.class) @RequestBody ProfileDTO dto) {
 		
-		return profileService.mainProfile();
+		Map<String, Object> val = new HashMap<String, Object>();
+		val.put("data", profileService.modifyProfileNm(dto));
+		
+		return val;
 	}
 	
-	
-	
+	// 회원휴대번호 변경
+	@ResponseBody
+	@PostMapping("/user/profile/modifyPh")
+	public Map<String, Object> modifyProfilePh(@Validated(ValidationSequence.class) @RequestBody ProfileDTO dto) {
+		
+		Map<String, Object> val = new HashMap<String, Object>();
+		val.put("data", profileService.modifyProfilePh(dto));
+		
+		return val;
+	}
 }
 
 

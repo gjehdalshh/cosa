@@ -19,4 +19,5 @@
 </div>
 
 
-<script defer src="/res/js/user/profile.js?ver=55"></script>
+<script defer src="/res/js/user/profile.js?ver=7"></script>
+<script defer src="/res/js/user/verification.js?ver=70"></script>

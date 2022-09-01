@@ -24,4 +24,15 @@
 		user_phone) VALUES (#{user_id}, #{user_pw}, #{user_nm},
 		#{user_phone});
 	</insert>
+	
+	<update id="modifyProfileNm">
+		UPDATE user SET user_nm = #{user_nm} WHERE i_user = #{i_user};
+	</update>
+	
+	<update id="modifyProfilePh">
+		UPDATE user SET user_phone = #{user_phone} WHERE i_user = #{i_user};
+	</update>
 </mapper>
+
+
+

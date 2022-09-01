@@ -8,6 +8,8 @@ import com.spring.cosa.user.exception.ValidationGroups;
 
 public class ProfileDTO extends UserEntity{
 	
+	private int i_user;
+	
 	@NotBlank(message = "이름을 입력해주세요", groups = ValidationGroups.NotBlankGroup.class)
 	@Size(min = 2, max = 4, message = "이름은 2 ~ 4자여야 합니다.", groups = ValidationGroups.SizeCheckGroup.class)
 	private String User_nm;
@@ -15,6 +17,14 @@ public class ProfileDTO extends UserEntity{
 	@NotBlank(message = "전화번호를 입력해주세요", groups = ValidationGroups.NotBlankGroup.class)
 	@Size(min = 11, max = 11, message = "전화번호는 11자여야 합니다.", groups = ValidationGroups.SizeCheckGroup.class)
 	private String User_phone;
+
+	public int getI_user() {
+		return i_user;
+	}
+
+	public void setI_user(int i_user) {
+		this.i_user = i_user;
+	}
 
 	public String getUser_nm() {
 		return User_nm;

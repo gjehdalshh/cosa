@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.cosa.user.dao.UserDAO;
 import com.spring.cosa.user.dto.LoginDTO;
+import com.spring.cosa.user.dto.ProfileDTO;
 import com.spring.cosa.user.mapper.UserMapper;
 
 @Service
@@ -19,7 +20,8 @@ public class ProfileService {
 	@Autowired
 	private HttpSession session;
 	
-	public ModelAndView mainProfile() {
+	public ModelAndView showMainProfile() {
+		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/user/profile");
 		mv.addObject("data", selectProfile());
@@ -27,11 +29,17 @@ public class ProfileService {
 		return mv;
 	}
 	
-	public UserDAO selectProfile() {
+	public int modifyProfileNm(ProfileDTO dto) {
+		return mapper.modifyProfileNm(dto);
+	}
+	
+	public int modifyProfilePh(ProfileDTO dto) {
+		return mapper.modifyProfilePh(dto);
+	}
+	
+	private UserDAO selectProfile() {
 		
-		if(session.getAttribute("user") == null) {
-			System.out.println("null test");
-		}
+		
 		
 		LoginDTO dto = (LoginDTO)session.getAttribute("user");
 		UserDAO vo = mapper.selectId(dto.getUser_id());
