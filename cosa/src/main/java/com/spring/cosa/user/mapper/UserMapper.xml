@@ -7,7 +7,7 @@
 		SELECT * FROM user WHERE
 		user_id = #{user_id};
 	</select>
-	
+
 	<select id="selectPw" resultType="UserDAO">
 		SELECT * FROM user WHERE
 		user_pw = #{user_pw};
@@ -24,14 +24,26 @@
 		user_phone) VALUES (#{user_id}, #{user_pw}, #{user_nm},
 		#{user_phone});
 	</insert>
-	
+
 	<update id="modifyProfileNm">
-		UPDATE user SET user_nm = #{user_nm} WHERE i_user = #{i_user};
+		UPDATE user SET user_nm = #{user_nm} WHERE i_user =
+		#{i_user};
 	</update>
-	
+
 	<update id="modifyProfilePh">
-		UPDATE user SET user_phone = #{user_phone} WHERE i_user = #{i_user};
+		UPDATE user SET user_phone = #{user_phone} WHERE
+		i_user = #{i_user};
 	</update>
+
+	<insert id="insProfileImg">
+		INSERT INTO user_image(file_type, file_data,
+		file_name, i_user) VALUES (#{file_type}, #{file_data}, #{file_name},
+		#{i_user})
+	</insert>
+	
+	<select id="test" resultType="UserImageDAO">
+		SELECT * from user_image WHERE i_user = #{i_user};
+	</select>
 </mapper>
 
 

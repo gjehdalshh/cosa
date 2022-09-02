@@ -12,4 +12,8 @@ public class Util {
         
         return formatedNow;
 	}
+	
+	public static int convertStringToInt(String data) {
+		return Integer.parseInt(data);
+	}
 }

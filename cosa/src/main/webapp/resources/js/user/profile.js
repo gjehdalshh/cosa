@@ -36,38 +36,20 @@ function changeNameAndPhone(url) {
 	})
 }
 
-let selectedFile
-
-file_input.onchange = function() {
-	selectedFile = file_input.files[0]
-	console.log(selectedFile)
-}
-
 function upload() {
+	let fileForm = document.querySelector('#fileForm')
+	formData = new FormData(fileForm)
 	
-	let reader = new FileReader()
-	let dataIndex = reader.result.indexOf(',') + 1
-	let base64 = reader.result.substring(dataIndex, reader.result.length)
-	
-	FileReader.prototype.read
-	console.log(base64)
-	let param = {
-		file_type: selectedFile.type,
-		file_name: selectedFile.name,
-		file_data: selectedFile.size,
-		i_user: i_user.value
-	}
-	console.log(param)
-	
-	fetch(`/user/profile/insertImg`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(param)
-	}).then(function(res) {
-		return res.json()
-	}).then(function(data) {
-		
+	fetch('/user/profile/insertImg',{
+		method:'POST',
+		body : formData
+	}).then(function() {
+		alert('업로드에 성공하였습니다.')
 	})
 }
+
+
+
+
+
+

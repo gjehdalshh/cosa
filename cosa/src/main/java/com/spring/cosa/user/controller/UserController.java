@@ -1,18 +1,23 @@
 package com.spring.cosa.user.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.cosa.user.dao.UserImageDAO;
 import com.spring.cosa.user.dto.JoinDTO;
 import com.spring.cosa.user.dto.LoginDTO;
 import com.spring.cosa.user.dto.ProfileDTO;
@@ -27,21 +32,22 @@ public class UserController {
 
 	@Autowired
 	private JoinService joinService;
-	
+
 	@Autowired
 	private LoginService loginService;
-	
+
 	@Autowired
 	private ProfileService profileService;
 
 	// 유저 회원가입
 	@GetMapping("/user/join")
-	public void join() {}
+	public void join() {
+	}
 
 	@ResponseBody
 	@PostMapping("/user/joinProc")
 	public Map<String, Object> joinProc(@Validated(ValidationSequence.class) @RequestBody JoinDTO dto) {
-		
+
 		Map<String, Object> val = new HashMap<String, Object>();
 		val.put("result", joinService.joinProc(dto));
 
@@ -50,57 +56,63 @@ public class UserController {
 
 	// 유저 로그인
 	@GetMapping("/user/login")
-	public void login() {}
-	
+	public void login() {
+	}
+
 	@ResponseBody
 	@PostMapping("/user/loginProc")
 	public Map<String, Object> loginProc(@Validated(ValidationSequence.class) @RequestBody LoginDTO dto) {
-		
+
 		Map<String, Object> val = new HashMap<String, Object>();
 		val.put("result", loginService.loginProc(dto));
-		
+
 		return val;
 	}
-	
+
 	// 회원정보 관리
 	@GetMapping("/user/profile")
 	public ModelAndView info() {
 		return profileService.showMainProfile();
 	}
-	
+
 	// 화원이름 변경
 	@ResponseBody
 	@PostMapping("/user/profile/modifyNm")
 	public Map<String, Object> modifyProfileNm(@Validated(ValidationSequence.class) @RequestBody ProfileDTO dto) {
-		
+
 		Map<String, Object> val = new HashMap<String, Object>();
 		val.put("data", profileService.modifyProfileNm(dto));
-		
+
 		return val;
 	}
-	
+
 	// 회원휴대번호 변경
 	@ResponseBody
 	@PostMapping("/user/profile/modifyPh")
 	public Map<String, Object> modifyProfilePh(@Validated(ValidationSequence.class) @RequestBody ProfileDTO dto) {
-		
+
 		Map<String, Object> val = new HashMap<String, Object>();
 		val.put("data", profileService.modifyProfilePh(dto));
-		
+
 		return val;
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/user/profile/insertImg")
-	public Map<String, Object> insProfileImg(@RequestBody UserImgDTO dto) {
-		
-		Map<String, Object> val = new HashMap<String, Object>();
-		System.out.println(dto.getFile_name());
-		System.out.println(dto.getFile_type());
-		
-		
-		return val;
+	public int insProfileImg(MultipartHttpServletRequest req) throws IOException {
+		return profileService.insProfileImg(req);
 	}
+
+	@GetMapping("/user/test")
+	public ResponseEntity<byte[]> test() {
+
+		UserImageDAO dto = profileService.test();
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", dto.getFile_type());
+		headers.add("Content-Length", String.valueOf(dto.getFile_data().length));
+
+		return new ResponseEntity<byte[]>(dto.getFile_data(), headers, HttpStatus.OK);
+	}
+
 }
-
-

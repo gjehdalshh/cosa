@@ -1,14 +1,21 @@
 package com.spring.cosa.user.service;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.cosa.common.Util;
 import com.spring.cosa.user.dao.UserDAO;
+import com.spring.cosa.user.dao.UserImageDAO;
 import com.spring.cosa.user.dto.LoginDTO;
 import com.spring.cosa.user.dto.ProfileDTO;
+import com.spring.cosa.user.dto.UserImgDTO;
 import com.spring.cosa.user.mapper.UserMapper;
 
 @Service
@@ -29,8 +36,8 @@ public class ProfileService {
 		return mv;
 	}
 
-	private UserDAO selectProfile() {
-
+	private UserDAO selectProfile(){
+	
 		LoginDTO dto = (LoginDTO) session.getAttribute("user");
 		UserDAO vo = mapper.selectId(dto.getUser_id());
 
@@ -43,5 +50,25 @@ public class ProfileService {
 
 	public int modifyProfilePh(ProfileDTO dto) {
 		return mapper.modifyProfilePh(dto);
+	}
+
+	public int insProfileImg(MultipartHttpServletRequest req) throws IOException {
+		
+		MultipartFile file = req.getFile("fileUpload");
+	
+		UserImgDTO dto = new UserImgDTO();
+		dto.setFile_data(file.getBytes());
+		dto.setFile_name(file.getOriginalFilename());
+		dto.setFile_type(file.getContentType());
+		dto.setI_user(Util.convertStringToInt(req.getParameter("i_user")));
+		
+		return mapper.insProfileImg(dto);
+	}
+	
+	public UserImageDAO test() {
+		
+		LoginDTO dto = (LoginDTO) session.getAttribute("user");
+		
+		return mapper.test(dto.getI_user());
 	}
 }
