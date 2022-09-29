@@ -2,26 +2,25 @@ package com.spring.cosa.user.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.cosa.user.dao.UserImageDAO;
+import com.spring.cosa.common.utils.S3Upload;
 import com.spring.cosa.user.dto.JoinDTO;
 import com.spring.cosa.user.dto.LoginDTO;
 import com.spring.cosa.user.dto.ProfileDTO;
-import com.spring.cosa.user.dto.UserImgDTO;
 import com.spring.cosa.user.exception.ValidationSequence;
 import com.spring.cosa.user.service.JoinService;
 import com.spring.cosa.user.service.LoginService;
@@ -38,6 +37,9 @@ public class UserController {
 
 	@Autowired
 	private ProfileService profileService;
+	
+	@Autowired
+	private S3Upload s3Upload;
 
 	// 유저 회원가입
 	@GetMapping("/user/join")
@@ -71,11 +73,11 @@ public class UserController {
 
 	// 회원정보 관리
 	@GetMapping("/user/profile")
-	public ModelAndView info() {
+	public ModelAndView info() throws IOException {
 		return profileService.showMainProfile();
 	}
-
-	// 화원이름 변경
+	
+	// 회원이름 변경
 	@ResponseBody
 	@PostMapping("/user/profile/modifyNm")
 	public Map<String, Object> modifyProfileNm(@Validated(ValidationSequence.class) @RequestBody ProfileDTO dto) {
@@ -98,21 +100,31 @@ public class UserController {
 	}
 
 	@ResponseBody
-	@PostMapping("/user/profile/insertImg")
-	public int insProfileImg(MultipartHttpServletRequest req) throws IOException {
-		return profileService.insProfileImg(req);
+	@PostMapping("/user/profile/insProfileImg")
+	public void insProfileImg(MultipartHttpServletRequest req) throws IOException {
+
+		List<MultipartFile> fileList = req.getFiles("files");
+		
+		System.out.println(fileList);
+		System.out.println(fileList.get(0).getOriginalFilename());
+		System.out.println(fileList.get(1).getOriginalFilename());
+
+		/*
+		String aa = s3Upload.upload(file);
+		System.out.println(aa);
+		
+		System.out.println(file);
+		System.out.println(file.getContentType());
+		System.out.println(file.getOriginalFilename());
+		System.out.println(file.getName());
+		System.out.println(file.getSize());
+		System.out.println(file.getBytes());
+	*/
+		//return profileService.insProfileImg(req);
 	}
-
-	@GetMapping("/user/test")
-	public ResponseEntity<byte[]> test() {
-
-		UserImageDAO dto = profileService.test();
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", dto.getFile_type());
-		headers.add("Content-Length", String.valueOf(dto.getFile_data().length));
-
-		return new ResponseEntity<byte[]>(dto.getFile_data(), headers, HttpStatus.OK);
-	}
-
 }
+
+
+
+
+

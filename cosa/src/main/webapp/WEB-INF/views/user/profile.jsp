@@ -21,6 +21,11 @@
 		<input type="file" id="fileUpload" name="fileUpload">
 		 <span onclick="upload()">업로드</span>
 	</form>
+	
+	<form id="fileForm" method="post" enctype="multipart/form-data">
+		<input type="file" id="fileUpload" name="fileUpload" multiple="multiple">
+	</form>
+	<span onclick="upload()">업로드</span>
 </div>
 
 

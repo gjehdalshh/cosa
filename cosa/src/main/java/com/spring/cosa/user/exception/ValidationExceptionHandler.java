@@ -5,8 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import com.spring.cosa.common.utils.FormatData;
 
-import com.spring.cosa.common.Util;
+
 
 
 @ControllerAdvice
@@ -18,7 +19,7 @@ public class ValidationExceptionHandler {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         errorResponse.setStatus(status.value());
         errorResponse.setMessage(e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
-        errorResponse.setTimestamp(Util.formatDate());
+        errorResponse.setTimestamp(FormatData.formatDate());
         
         return new ResponseEntity<ErrorResponse>(errorResponse, status);
     }

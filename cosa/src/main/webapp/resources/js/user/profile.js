@@ -49,6 +49,34 @@ function upload() {
 }
 
 
+function upload() {
+
+	let fileUpload = document.querySelector('#fileUpload')
+
+	let files = fileUpload.files
+	console.log('files : ' + files)
+	filesArr = Array.prototype.slice.call(files);
+	let formData = new FormData()
+
+	for (var i = 0; i < filesArr.length; i++) {
+		console.log('aa')
+		//formData.append('files[' + i + ']', filesArr[i]);
+		formData.append('files', filesArr[i]);
+	}
+
+	fetch('/user/profile/insProfileImg', {
+		method: 'POST',
+		headers: {
+			contentType: false,               // * 중요 *
+			processData: false,               // * 중요 *
+			enctype: 'multipart/form-data',  // * 중요 *
+		},
+		body: formData
+	}).then(function() {
+		alert('업로드에 성공하였습니다.')
+	})
+}
+
 
 
 

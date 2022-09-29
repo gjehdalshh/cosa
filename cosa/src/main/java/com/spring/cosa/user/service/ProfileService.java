@@ -10,9 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.cosa.common.Util;
+import com.spring.cosa.common.utils.ConvertType;
+import com.spring.cosa.common.utils.S3Upload;
 import com.spring.cosa.user.dao.UserDAO;
-import com.spring.cosa.user.dao.UserImageDAO;
 import com.spring.cosa.user.dto.LoginDTO;
 import com.spring.cosa.user.dto.ProfileDTO;
 import com.spring.cosa.user.dto.UserImgDTO;
@@ -26,12 +26,16 @@ public class ProfileService {
 
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private S3Upload s3Upload;
 
-	public ModelAndView showMainProfile() {
+	public ModelAndView showMainProfile() throws IOException {
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/user/profile");
 		mv.addObject("data", selectProfile());
+		mv.addObject("urlPath", s3Upload.urlPath());
 
 		return mv;
 	}
@@ -59,16 +63,10 @@ public class ProfileService {
 		UserImgDTO dto = new UserImgDTO();
 		dto.setFile_data(file.getBytes());
 		dto.setFile_name(file.getOriginalFilename());
+		
 		dto.setFile_type(file.getContentType());
-		dto.setI_user(Util.convertStringToInt(req.getParameter("i_user")));
+		dto.setI_user(ConvertType.convertStringToInt(req.getParameter("i_user")));
 		
 		return mapper.insProfileImg(dto);
-	}
-	
-	public UserImageDAO test() {
-		
-		LoginDTO dto = (LoginDTO) session.getAttribute("user");
-		
-		return mapper.test(dto.getI_user());
 	}
 }
