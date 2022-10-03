@@ -2,7 +2,6 @@ package com.spring.cosa.user.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 import com.spring.cosa.user.entity.UserEntity;
