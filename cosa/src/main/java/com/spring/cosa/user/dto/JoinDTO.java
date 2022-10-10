@@ -5,10 +5,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import com.spring.cosa.user.entity.UserEntity;
 import com.spring.cosa.user.exception.ValidationGroups;
+import com.sun.istack.NotNull;
 
-public class JoinDTO extends UserEntity {
+public class JoinDTO {
 	@NotBlank(message = "아이디를 입력해주세요", groups = ValidationGroups.NotBlankGroup.class)
 	@Email(message = "아이디를 이메일 형식으로 작성해주세요.", groups = ValidationGroups.EmailCheckGroup.class)
 	private String user_id;
@@ -24,6 +24,40 @@ public class JoinDTO extends UserEntity {
 	@NotBlank(message = "전화번호를 입력해주세요", groups = ValidationGroups.NotBlankGroup.class)
 	@Size(min = 11, max = 11, message = "전화번호는 11자여야 합니다.", groups = ValidationGroups.SizeCheckGroup.class)
 	private String user_phone;
+	
+	//@NotBlank(message = "주민번호를 입력해주세요", groups = ValidationGroups.NotBlankGroup.class)
+	//@Size(min = 13, max = 13, message = "주민번호는 13자여야 합니다.", groups = ValidationGroups.SizeCheckGroup.class)
+	private int user_regNo;
+	
+	@NotNull
+	@Size(min = 5, max = 5, message = "보안코드는 5자여야 합니다..", groups = ValidationGroups.SizeCheckGroup.class)
+	private String authCode;
+	
+	private String authCodeCheck;
+
+	public String getAuthCodeCheck() {
+		return authCodeCheck;
+	}
+
+	public void setAuthCodeCheck(String authCodeCheck) {
+		this.authCodeCheck = authCodeCheck;
+	}
+
+	public String getAuthCode() {
+		return authCode;
+	}
+
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
+	}
+
+	public int getUser_regNo() {
+		return user_regNo;
+	}
+
+	public void setUser_regNo(int user_regNo) {
+		this.user_regNo = user_regNo;
+	}
 
 	public String getUser_id() {
 		return user_id;

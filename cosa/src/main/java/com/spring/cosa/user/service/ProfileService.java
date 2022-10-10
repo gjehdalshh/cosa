@@ -27,15 +27,15 @@ public class ProfileService {
 	@Autowired
 	private HttpSession session;
 	
-	@Autowired
-	private S3Upload s3Upload;
+	//@Autowired
+	//private S3Upload s3Upload;
 
 	public ModelAndView showMainProfile() throws IOException {
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/user/profile");
 		mv.addObject("data", selectProfile());
-		mv.addObject("urlPath", s3Upload.urlPath());
+		//mv.addObject("urlPath", s3Upload.urlPath());
 
 		return mv;
 	}

@@ -2,26 +2,14 @@ let i_user = document.querySelector('#i_user')
 let file_input = document.querySelector('#fileUpload')
 
 function rename() {
-	let url = `/user/profile/modifyNm`
-	changeNameAndPhone(url)
-}
-
-function changePhoneNumber() {
-	let url = `/user/profile/modifyPh`
-	changeNameAndPhone(url)
-}
-
-function changeNameAndPhone(url) {
 	let nm = document.querySelector('#nm')
-	let phone = document.querySelector('#phone')
-
+	
 	let param = {
 		i_user: i_user.value,
-		user_nm: nm.value,
-		user_phone: phone.value
+		user_nm: nm.value 
 	}
 	
-	fetch(url, {
+	fetch(`/user/profile/modifyNm`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -31,7 +19,33 @@ function changeNameAndPhone(url) {
 		return res.json()
 	}).then(function(data) {
 		if (conditionVerification(data)) {
-			alert('회원정보가 변경되었습니다.')
+			alert('이름이 변경되었습니다.')
+		}
+	})
+}
+
+function changePhoneNumber() {
+	let url = `/user/profile/modifyPh`
+	changeNameAndPhone(url)
+	
+	let phone = document.querySelector('#phone')
+	
+	let param = {
+		i_user: i_user.value,
+		user_phone: phone.value 
+	}
+	
+	fetch(`/user/profile/modifyPh`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(param)
+	}).then(function(res) {
+		return res.json()
+	}).then(function(data) {
+		if (conditionVerification(data)) {
+			alert('휴대폰 번호가 변경되었습니다.')
 		}
 	})
 }

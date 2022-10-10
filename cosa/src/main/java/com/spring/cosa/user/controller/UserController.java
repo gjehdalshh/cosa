@@ -20,10 +20,13 @@ import com.spring.cosa.common.utils.S3Upload;
 import com.spring.cosa.user.dto.JoinDTO;
 import com.spring.cosa.user.dto.LoginDTO;
 import com.spring.cosa.user.dto.ProfileDTO;
+import com.spring.cosa.user.dto.SmsDTO;
 import com.spring.cosa.user.exception.ValidationSequence;
 import com.spring.cosa.user.service.JoinService;
 import com.spring.cosa.user.service.LoginService;
 import com.spring.cosa.user.service.ProfileService;
+
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Controller
 public class UserController {
@@ -37,16 +40,15 @@ public class UserController {
 	@Autowired
 	private ProfileService profileService;
 	
-	@Autowired
-	private S3Upload s3Upload;
+	//@Autowired
+	//private S3Upload s3Upload;
 
 	// 유저 회원가입
 	@GetMapping("/user/join")
-	public void join() {
-	}
+	public void join() {}
 
 	@ResponseBody
-	@PostMapping("/user/joinProc")
+	@PostMapping("/user/join")
 	public Map<String, Object> joinProc(@Validated(ValidationSequence.class) @RequestBody JoinDTO dto) {
 
 		Map<String, Object> val = new HashMap<String, Object>();
@@ -97,6 +99,17 @@ public class UserController {
 
 		return val;
 	}
+	
+	// sms 문자 인증
+	@ResponseBody
+	@PostMapping("/user/sms")
+	public Map<String, Object> getSmsCode(@Validated(ValidationSequence.class) @RequestBody SmsDTO dto) throws CoolsmsException {
+		
+		Map<String, Object> val = new HashMap<String, Object>();
+		val.put("authCode", joinService.sendSms(dto));
+
+		return val;
+	}
 
 	@ResponseBody
 	@PostMapping("/user/profile/insProfileImg")
@@ -121,6 +134,8 @@ public class UserController {
 	*/
 		//return profileService.insProfileImg(req);
 	}
+	
+	
 }
 
 

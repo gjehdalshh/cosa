@@ -7,7 +7,7 @@ import javax.validation.constraints.Pattern;
 import com.spring.cosa.user.entity.UserEntity;
 import com.spring.cosa.user.exception.ValidationGroups;
 
-public class LoginDTO extends UserEntity {
+public class LoginDTO {
 	
 	private int i_user;
 

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
@@ -30,5 +32,10 @@ public class GlobalExceptionHandler {
 		ModelAndView mv = new ModelAndView();
 		
 		return mv;
+	}
+	
+	@ExceptionHandler(CoolsmsException.class)
+	protected void smsHandler() {
+		
 	}
 }

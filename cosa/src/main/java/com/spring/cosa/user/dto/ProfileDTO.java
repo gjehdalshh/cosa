@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import com.spring.cosa.user.entity.UserEntity;
 import com.spring.cosa.user.exception.ValidationGroups;
 
-public class ProfileDTO extends UserEntity{
+public class ProfileDTO {
 	
 	private int i_user;
 	

@@ -20,7 +20,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 
 @Component
 public class S3Upload {
-
+	/*
 	private final AmazonS3 s3Client;
 
 	private String bucket;
@@ -68,5 +68,5 @@ public class S3Upload {
 		Date date = new Date();
 		
 		return sdf.format(date);
-	}
+	}*/
 }

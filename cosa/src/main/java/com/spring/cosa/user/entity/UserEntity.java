@@ -7,7 +7,43 @@ public class UserEntity {
 	private String user_pw;
 	private String user_nm;
 	private String user_phone;
+	private int user_regNo;
 	private String r_dt;
+	private int postCode;
+	private String roadAddr;
+	private String jibunAddr;
+	private String detailAddr;
+	
+	public int getPostCode() {
+		return postCode;
+	}
+	public void setPostCode(int postCode) {
+		this.postCode = postCode;
+	}
+	public String getRoadAddr() {
+		return roadAddr;
+	}
+	public void setRoadAddr(String roadAddr) {
+		this.roadAddr = roadAddr;
+	}
+	public String getJibunAddr() {
+		return jibunAddr;
+	}
+	public void setJibunAddr(String jibunAddr) {
+		this.jibunAddr = jibunAddr;
+	}
+	public String getDetailAddr() {
+		return detailAddr;
+	}
+	public void setDetailAddr(String detailAddr) {
+		this.detailAddr = detailAddr;
+	}
+	public int getUser_regNo() {
+		return user_regNo;
+	}
+	public void setUser_regNo(int user_regNo) {
+		this.user_regNo = user_regNo;
+	}
 	private int authority;
 	
 	public int getI_user() {
